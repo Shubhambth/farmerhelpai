@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-2xl mx-auto mt-16 p-8 bg-white rounded-xl shadow-lg transition-all duration-500 animate-fade-in">
+    <h2 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">🌾 Farmer Crop Suggestion Form</h2>
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        <div>
+            <label class="block text-gray-700 font-medium mb-1">📍 Location/Area</label>
+            <input type="text" name="location" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none transition" required>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium mb-1">🌱 Soil Type</label>
+            <input type="text" name="soil_type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none transition" required>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium mb-1">🌦️ Weather Conditions</label>
+            <input type="text" name="weather" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none transition" required>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium mb-1">💧 Water Availability</label>
+            <input type="text" name="water_availability" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none transition" required>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium mb-1">📝 Additional Notes</label>
+            <textarea name="additional_notes" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none transition"></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+            🚀 Get Suggestion
+        </button>
+    </form>
+
+    {% if suggestion %}
+    <div class="mt-8 p-6 bg-green-100 border border-green-300 rounded-lg shadow-md animate-slide-up">
+        <h3 class="text-xl font-bold text-green-800 mb-3">✅ AI Suggestion:</h3>
+    
+        <div class="prose prose-green max-w-none text-gray-800">
+            {{ suggestion|safe }}
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- Tailwind Animations -->
+<style>
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+}
+.animate-slide-up {
+    animation: slide-up 0.5s ease-out forwards;
+}
+</style>
+{% endblock %}
